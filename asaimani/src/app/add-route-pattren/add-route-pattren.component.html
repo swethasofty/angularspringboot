@@ -1,0 +1,61 @@
+<label>Add Route Pattern</label>
+
+<div>
+  <label>Service:</label>
+  <input type="text" [(ngModel)]="service">
+  <label>Routing Type:</label>
+  <input type="text" [(ngModel)]="routingType">
+  <label>MTA:</label>
+  <input type="text" [(ngModel)]="mta">
+  </div>
+<br>
+
+  
+<div>
+    <label>LATA:</label>
+    <input type="text" [(ngModel)]="lata" >
+    <label> Custom Name:</label>
+    <input type="text" [(ngModel)]="customName" >
+    <label>PSAP Name-Id:  </label>
+    <input type="text" [(ngModel)]="PSAPNameId" >
+    </div>
+
+  <div>
+    <button type="button" (click)="add()">add</button>
+  </div>
+{{title}}
+<!-- {{routePttrenDetails[0]}} -->
+  <section>
+    <div>
+      <table style="width:100%" >
+        <tr>
+        <th>Service</th>
+        <th>routing type</th>
+        <th>mta</th>
+        <th>lata</th>
+        <th>cNAme</th>
+        <th>nameId</th>
+        </tr>
+
+ 
+        <tr *ngFor="let data of routePttrenDetails ; let i = index">
+        {{i}}
+          <td>{{data.service}}</td>
+          <td>{{data.routingType}}</td>
+          <td>{{data.mta}}</td>
+          <td>{{data.lata}}</td>
+          <td>{{data.customName}}</td>
+          <td>{{data.psapnameId}}</td>
+          <td>
+              <button type="submit" (click)="delete(data,i)">delete
+                </button>
+              </td>
+        </tr>
+      </table>
+      <!-- <div>
+        <button type="submit" (click)="delete()">delete</button>
+      </div> -->
+    </div>
+  </section>
+
+
