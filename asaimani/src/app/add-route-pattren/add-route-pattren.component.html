@@ -2,28 +2,28 @@
 
 <div>
   <label>Service:</label>
-  <input type="text" [(ngModel)]="service">
+  <input hidden="true" type="text" [(ngModel)]="routeData.id">
+  <input type="text" [(ngModel)]="routeData.service">
   <label>Routing Type:</label>
-  <input type="text" [(ngModel)]="routingType">
+  <input type="text" [(ngModel)]="routeData.routingType">
   <label>MTA:</label>
-  <input type="text" [(ngModel)]="mta">
+  <input type="text" [(ngModel)]="routeData.mta">
   </div>
 <br>
 
   
 <div>
     <label>LATA:</label>
-    <input type="text" [(ngModel)]="lata" >
+    <input type="text" [(ngModel)]="routeData.lata" >
     <label> Custom Name:</label>
-    <input type="text" [(ngModel)]="customName" >
+    <input type="text" [(ngModel)]="routeData.customName" >
     <label>PSAP Name-Id:  </label>
-    <input type="text" [(ngModel)]="PSAPNameId" >
+    <input type="text" [(ngModel)]="routeData.PSAPNameId" >
     </div>
 
   <div>
-    <button type="button" (click)="add()">add</button>
+    <button type="button" (click)="add(routeData)">add</button>
   </div>
-{{title}}
 <!-- {{routePttrenDetails[0]}} -->
   <section>
     <div>
@@ -39,17 +39,22 @@
 
  
         <tr *ngFor="let data of routePttrenDetails ; let i = index">
-        {{i}}
+        {{data.id}}
           <td>{{data.service}}</td>
           <td>{{data.routingType}}</td>
           <td>{{data.mta}}</td>
           <td>{{data.lata}}</td>
           <td>{{data.customName}}</td>
           <td>{{data.psapnameId}}</td>
+          
           <td>
               <button type="submit" (click)="delete(data,i)">delete
                 </button>
               </td>
+              <td>
+                  <button type="submit" (click)="onEdit(data)">Edit
+                    </button>
+                  </td>
         </tr>
       </table>
       <!-- <div>

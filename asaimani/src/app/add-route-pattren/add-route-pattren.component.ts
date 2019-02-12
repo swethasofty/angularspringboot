@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {DataService} from "../data.service"
 export interface RouteData{
+  id :number;
   service ?:string;  //? stands for property is optional
   routingType ?:any;
   mta ?:string ;
@@ -15,6 +16,7 @@ export interface RouteData{
   styleUrls: ['./add-route-pattren.component.scss']
 })
 export class AddRoutePattrenComponent implements OnInit {
+  id :null;
   service:any;
   routingType:any;
   mta:any;
@@ -23,6 +25,7 @@ export class AddRoutePattrenComponent implements OnInit {
   PSAPNameId:any;
   routeData: RouteData = {};
   check :boolean;
+  edit :boolean = false;
 title="ssss";
 routePttrenDetails:RouteData[];
 routePttrenDetail=[];
@@ -32,29 +35,38 @@ routePttrenDetail=[];
    }
 
   ngOnInit() {
+
+    
     this.dataService.GetRoutePattren().subscribe(data => {
-    //  this.routePttrenDetail.push(data)
       this.routePttrenDetails=data;
-      alert(this.routePttrenDetails.every);
     })
   }
   display(){
 
   }
-  add()
+  add(routeData)
   {
-    this.routeData.service = this.service;
-    this.routeData.routingType = this.routingType;
-    this.routeData.mta = this.mta;
-    this.routeData.lata = this.lata;
-    this.routeData.customName = this.customName;
-    this.routeData.PSAPNameId = this.PSAPNameId;
+    if(this.edit){
+alert("edit true");
+this.dataService.updateData(routeData).subscribe((data) => {
+  this.routePttrenDetails = data;
+  
+ 
+});
+    }else{
+    this.routeData.service = this.routeData.service;
+    this.routeData.routingType = this.routeData.routingType;
+    this.routeData.mta = this.routeData.mta;
+    this.routeData.lata = this.routeData.lata;
+    this.routeData.customName = this.routeData.customName;
+    this.routeData.PSAPNameId = this.routeData.PSAPNameId;
   //  this.dataService.addRoutePattren(this.routeData).subscribe(data =>{this.routePttrenDetail.push(data)
   this.dataService.addRoutePattren(this.routeData).subscribe(data => {
     this.routePttrenDetails.push(data.data);
    // this.routePttrenDetails=this.routePttrenDetail;
     });
-    alert(this.service);
+  }
+   // alert(this.service);
   }
 
   delete(i,a){
@@ -63,5 +75,14 @@ routePttrenDetail=[];
      
       });
   }
-
+  onEdit(emp){
+    this.edit =true;
+    this.routeData.id = emp.id;
+    this.routeData.service = emp.service;
+    this.routeData.routingType = emp.routingType;
+    this.routeData.mta = emp.mta;
+    this.routeData.lata =emp.lata;
+    this.routeData.customName = emp.customName;
+    this.routeData.PSAPNameId = emp.PSAPNameId;
+   }
 }

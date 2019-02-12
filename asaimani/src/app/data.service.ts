@@ -6,10 +6,6 @@ import { map } from 'rxjs/operators';  // Import it up here
 
 import {SignupData} from './signup/signup.component'
 
-// class User{
-//   username:any;
-//   password:any;
-// }
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json'
@@ -52,6 +48,10 @@ GetRoutePattren(): Observable<any> {
 deleteRoutePattren(id): Observable<any> {
   this.url = 'http://localhost:8400/api/deleteRoutepattren/'+id;
  return this.http.delete(this.url,httpOptions)
+}
+updateData(routeData): Observable<any> {
+  this.url = 'http://localhost:8400/api/updateRoutepattren/'+routeData.id;
+ return this.http.put(this.url,routeData,httpOptions)
 }
 
 }
