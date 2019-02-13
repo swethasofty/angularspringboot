@@ -12,4 +12,6 @@ import com.example.model.RoutePattren;
 @Repository
 public interface RoutePattrenRepo extends JpaRepository <RoutePattren, Integer>{
 
+	RoutePattren findAllById(Integer id);
+
 }

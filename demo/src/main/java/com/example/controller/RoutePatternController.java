@@ -69,4 +69,18 @@ public class RoutePatternController {
 		
 	}
 	
+	@RequestMapping(value = "/updateRoutepattren/{id}", method = RequestMethod.PUT)
+	public RestResponse updateRoutepattren(@PathVariable("id") Integer id, @RequestBody final RoutePattren PattrenData) {
+		
+		RoutePattren routeData = routePattrenRepo.findAllById(id);
+		routeData.setService(PattrenData.getService());
+		routeData.setLata(PattrenData.getLata());
+		routeData.setMta(PattrenData.getMta());
+		routeData.setCustomName(PattrenData.getCustomName());
+		routeData.setRoutingType(PattrenData.getRoutingType());
+//		
+		RoutePattren routeData1 = routePattrenRepo.save(routeData);
+		
+		return new RestResponse(RestResponse.SUCCESS,routeData1);
+	}
 }
