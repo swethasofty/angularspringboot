@@ -52,6 +52,7 @@ public class UserController {
 		
 		if(user ==null )
 		{
+			status = "signUp Successfull";
 			user =	userRepo.save(inUser);
 			
 			return new RestResponse(RestResponse.SUCCESS,user);

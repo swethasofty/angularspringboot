@@ -6,6 +6,8 @@ export class SignupData{
   username:string;
   password:any;
 }
+
+declare var M : any;
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -16,6 +18,7 @@ export class SignupComponent implements OnInit {
   submitted = false;
   success = false;
   signupData :any;
+  status :string ="";
   heroes = [];
 
   constructor(private formBuilder: FormBuilder,private router: Router, private dataService:DataService) 
@@ -23,7 +26,7 @@ export class SignupComponent implements OnInit {
 
     this.signupData=new SignupData;
   }
-
+ 
   ngOnInit() {
     this.myForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -38,8 +41,15 @@ export class SignupComponent implements OnInit {
   this.signupData.username = this.myForm.get('name').value;
  
   this.signupData.password = this.myForm.get('password').value;
-    this.dataService.signUp(this.signupData).subscribe(data =>{ this.heroes.push(data)
-    
+    this.dataService.signUp(this.signupData).subscribe(data =>{ 
+      this.heroes.push(data);
+      if(data.success)
+      {
+        M.toast({html:"signUp Successfull", classes :'rouned'});
+        this.router.navigate((['/']));
+      }else{
+        M.toast({html:"User Already Exsists", classes :'rouned'});
+      }
     });
     this.success = true;
     console.log(this.heroes);

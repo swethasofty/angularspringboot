@@ -40,6 +40,7 @@ routePttrenDetail=[];
   displayAll(){ 
     this.dataService.GetRoutePattren().subscribe(data => {
       this.routePttrenDetails=data;
+      console.dir(data);
     })
 
   }
